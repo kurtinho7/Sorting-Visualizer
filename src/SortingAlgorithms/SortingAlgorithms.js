@@ -126,3 +126,67 @@ export function selectionSort(array) {
     return animations;
 
 }
+
+function partition(array, startIdx, endIdx, animations) {
+    let pivot = array[endIdx];
+
+    let i = startIdx - 1;
+    const animation1 = {}
+    animation1.pivot = endIdx;
+    animations.push(animation1);
+    const animation4 = {};
+    animation4.compare = [startIdx, endIdx - 1];
+    animations.push(animation4);
+
+    for (let j = startIdx; j <= endIdx - 1; j++) {
+
+
+        if (array[j] <= pivot) {
+            const animation2 = {};
+            i++;
+
+            animation2.swap = [i, j];
+            animations.push(animation2);
+
+            let temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+
+        }
+
+    }
+
+    let temp = array[i + 1];
+    array[i + 1] = array[endIdx];
+    array[endIdx] = temp;
+    const animation5 = {};
+    animation5.endCompare = [startIdx, endIdx - 1];
+    animations.push(animation5);
+
+    const animation3 = {};
+    animation3.swapPivot = [i + 1, endIdx];
+    animations.push(animation3);
+
+
+    return i + 1;
+}
+
+function quickSortHelper(array, startIdx, endIdx, animations) {
+    if (startIdx < endIdx) {
+        let pivotIndex = partition(array, startIdx, endIdx, animations);
+
+        quickSortHelper(array, startIdx, pivotIndex - 1, animations);
+        quickSortHelper(array, pivotIndex + 1, endIdx, animations);
+    }
+
+}
+
+export function quickSort(array) {
+    const animations = [];
+    if (array.length <= 1) {
+        return animations;
+    }
+
+    quickSortHelper(array, 0, array.length - 1, animations);
+    return animations;
+}

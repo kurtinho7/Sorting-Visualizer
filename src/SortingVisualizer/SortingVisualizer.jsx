@@ -1,6 +1,6 @@
 import React from "react";
 import './SortingVisualizer.css';
-import { mergeSort, selectionSort } from "../SortingAlgorithms/SortingAlgorithms";
+import { mergeSort, quickSort, selectionSort } from "../SortingAlgorithms/SortingAlgorithms";
 
 export class SortingVisualizer extends React.Component {
     constructor(props) {
@@ -24,6 +24,76 @@ export class SortingVisualizer extends React.Component {
     }
 
     quickSort() {
+        const animations = quickSort(this.state.array.slice());
+        const SPEED = 10;
+        for (let i = 0; i < animations.length; i++) {
+            const t = i * SPEED;
+
+            const arrayBars = document.getElementsByClassName("arrayBar");
+            const animation = animations[i];
+            const hasPivot = animation.hasOwnProperty("pivot");
+            const hasSwap = animation.hasOwnProperty("swap");
+            const hasSwapPivot = animation.hasOwnProperty("swapPivot");
+            const hasCompare = animation.hasOwnProperty("compare");
+            const hasEndCompare = animation.hasOwnProperty("endCompare");
+
+
+            if (hasPivot) {
+                const pivotId = animation.pivot;
+                const pivotStyle = arrayBars[pivotId].style;
+                setTimeout(() => {
+                    pivotStyle.backgroundColor = 'green';
+                }, t);
+            }
+            if (hasCompare) {
+                setTimeout(() => {
+                    const [startIdx, endIdx] = animation.compare;
+                    for (let i = startIdx; i <= endIdx; i++) {
+                        const barStyle = arrayBars[i].style;
+                        barStyle.backgroundColor = 'orange';
+                    }
+
+                }, t);
+
+            }
+            if (hasSwap) {
+                setTimeout(() => {
+                    const [barOneId, barTwoId] = animation.swap;
+                    const barOneStyle = arrayBars[barOneId].style;
+                    const barTwoStyle = arrayBars[barTwoId].style;
+                    const tempHeight = barOneStyle.height;
+                    barOneStyle.height = barTwoStyle.height;
+                    barTwoStyle.height = tempHeight;
+
+                }, t);
+            }
+            if (hasSwapPivot) {
+                setTimeout(() => {
+                    const [barOneId, barTwoId] = animation.swapPivot;
+                    const barOneStyle = arrayBars[barOneId].style;
+                    const barTwoStyle = arrayBars[barTwoId].style;
+                    const tempHeight = barOneStyle.height;
+                    barOneStyle.height = barTwoStyle.height;
+                    barTwoStyle.height = tempHeight;
+                    barTwoStyle.backgroundColor = 'turquoise';
+
+
+                }, t);
+            }
+            if (hasEndCompare) {
+                setTimeout(() => {
+                    const [startIdx, endIdx] = animation.endCompare;
+                    for (let k = startIdx; k <= endIdx; k++) {
+                        const barStyle = arrayBars[k].style;
+                        barStyle.backgroundColor = 'turquoise';
+                    }
+
+                }, t);
+
+            }
+
+        }
+
 
     }
 
