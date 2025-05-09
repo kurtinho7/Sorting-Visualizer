@@ -50,7 +50,7 @@ export class SortingVisualizer extends React.Component {
                     const [startIdx, endIdx] = animation.compare;
                     for (let i = startIdx; i <= endIdx; i++) {
                         const barStyle = arrayBars[i].style;
-                        barStyle.backgroundColor = 'orange';
+                        barStyle.backgroundColor = 'red';
                     }
 
                 }, t);
@@ -94,6 +94,18 @@ export class SortingVisualizer extends React.Component {
 
         }
 
+        setTimeout(() => {
+            const arrayBars = document.getElementsByClassName("arrayBar");
+            for (let j = 0; j < arrayBars.length ; j++) {
+                setTimeout(() => {
+                    const barStyle = arrayBars[j].style;
+                    barStyle.backgroundColor = 'gold';
+                }, j * 3);
+            }
+        }, animations.length * SPEED + 1);
+
+        
+
 
     }
 
@@ -121,6 +133,16 @@ export class SortingVisualizer extends React.Component {
                 }, i * 3);
             }
         }
+
+        setTimeout(() => {
+            const arrayBars = document.getElementsByClassName("arrayBar");
+            for (let j = 0; j < arrayBars.length ; j++) {
+                setTimeout(() => {
+                    const barStyle = arrayBars[j].style;
+                    barStyle.backgroundColor = 'gold';
+                }, j * 3);
+            }
+        }, animations.length * 3 + 1);
     }
 
     bubbleSort() {
@@ -174,6 +196,20 @@ export class SortingVisualizer extends React.Component {
                 }, i * 1);
             }
         }
+
+        setTimeout(() => {
+            const arrayBars = document.getElementsByClassName("arrayBar");
+            for (let j = 0; j < arrayBars.length ; j++) {
+                setTimeout(() => {
+                    const barStyle = arrayBars[j].style;
+                    barStyle.backgroundColor = 'gold';
+                }, j * 3);
+            }
+        }, animations.length * 1 + 1);
+
+
+
+ 
 
     }
 
