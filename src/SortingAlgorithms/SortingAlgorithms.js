@@ -190,3 +190,65 @@ export function quickSort(array) {
     quickSortHelper(array, 0, array.length - 1, animations);
     return animations;
 }
+
+function heapify (array, n, i, animations) {
+
+    let largest = i;
+    let l = 2*i + 1;
+    let r = 2*i + 2;
+
+    if (l < n && array[l] > array[largest]) {
+        largest = l;
+    }
+
+    if (r < n && array[r] > array[largest]) {
+        largest = r;
+    }
+
+    if (largest !== i) {
+        const animation1 = {};
+        const animation2 = {};
+
+        animation1.compare = [i, largest];
+        animation2.swap = [i, largest];
+        animations.push(animation1);
+        animations.push(animation2);
+        let temp = array[i];
+        array[i] = array[largest];
+        array[largest] = temp;
+
+        heapify(array, n, largest, animations);
+
+    }
+
+}
+
+
+export function heapSort (array) {
+    const animations = [];
+
+    let n = array.length;
+
+    for (let i = Math.floor(n/2) - 1; i >= 0; i--) {
+        heapify(array, n, i, animations);
+    }
+
+    for (let i = n - 1; i > 0; i--) {
+
+        const animation1 = {}
+        const animation2 = {}
+
+        animation2.swap = [0, i];
+        animation1.compare = [0, i];
+        animations.push(animation1);
+        animations.push(animation2);
+        let temp = array[0];
+        array[0] = array[i];
+        array[i] = temp;
+
+        heapify(array, i, 0, animations);
+    }
+
+    return animations;
+
+}
