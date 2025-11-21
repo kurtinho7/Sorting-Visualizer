@@ -1,35 +1,84 @@
-.array-container{
-    display: flex;
-    align-items: flex-end;
-    height: 100vh;
-    width: 90vw;
-    box-sizing: border-box;
-    margin-left: 50px;
-    overflow-x: hidden;
-
-}
-
-.button-container {
-    display: flex;
-    flex-direction: column;
-    left: 0px;
-    width: 100px;
-    height: 100vh;
-    gap: 150px;
-    margin-left: 50px;
-}
-
-.arrayBar {
-    background-color: turquoise;
-    width: 3px;
-    margin: 0 1px;
-}
-
-.visualizer-wrapper {
+:root {
+    --bg-dark: #0e0e10;
+    --accent: #00e0c6;
+    --accent-hover: #00c0a8;
+    --text-light: #e5e5e5;
+  }
+  
+  .visualizer-wrapper {
     display: flex;
     height: 100vh;
     width: 100vw;
     margin: 0;
+    background: var(--bg-dark);
+    color: var(--text-light);
     box-sizing: border-box;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    width: 140px;
+    background: rgba(255, 255, 255, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    padding: 2rem 1rem;
+    backdrop-filter: blur(6px);
+  }
+  
+  .button-container button {
+    background: var(--accent);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    width: 100%;
+  }
+  
+  .button-container button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 224, 198, 0.4);
+  }
+  
+  .array-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-grow: 1;
+    height: 100vh;
+    padding: 0 2rem;
+    overflow-x: auto;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+  }
+  
+  .array-container::-webkit-scrollbar {
+    height: 8px;
+  }
+  .array-container::-webkit-scrollbar-thumb {
+    background-color: var(--accent);
+    border-radius: 10px;
+  }
+  
+  .arrayBar {
+    background: var(--bar-color);
+    border-radius: 4px 4px 0 0;
+    width: 4px;
+    margin: 0 1.5px;
+    transition: height 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 0 8px rgba(0, 224, 198, 0.5);
+    background-color: linear-gradient(180deg, #00e0c6, #0098ff);
+
   }
   
